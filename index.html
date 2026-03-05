@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="card">
-        <h1>🌙 Smart-Infaq Dashboard</h1>
+        <h1>🌙 Smart Infaq Dashboard</h1>
         <div id="status">Menghubungkan ke MQTT...</div>
         <div id="data">0<span class="unit">%</span></div>
         <p>Kapasitas Kotak Amal (Real-time)</p>
@@ -28,6 +28,7 @@
         client.on('connect', () => {
             document.getElementById('status').innerText = "Terhubung ke Internet ✅";
             client.subscribe(topic);
+            console.log("Subscribed to : " + topic);
         });
 
         client.on('message', (t, message) => {
@@ -35,7 +36,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
