@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": 11.1, "left": -176.9, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -99.2,
+      "left": 197.6,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 50.4,
+      "left": 270.6,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ultrasonic1:VCC", "esp:5V", "red", [ "v96", "h105.6" ] ],
+    [ "ultrasonic1:GND", "esp:GND.1", "black", [ "v48", "h75.6" ] ],
+    [ "ultrasonic1:TRIG", "esp:5", "green", [ "v163.2", "h287.6", "v-153.6" ] ],
+    [ "ultrasonic1:ECHO", "esp:18", "green", [ "v134.4", "h220", "v-134.4", "h-28.8" ] ],
+    [ "lcd1:GND", "esp:GND.1", "black", [ "h-412.8", "v192" ] ],
+    [ "lcd1:VCC", "esp:5V", "red", [ "h-393.6", "v259.3" ] ],
+    [ "lcd1:SDA", "esp:21", "green", [ "h-96", "v125" ] ],
+    [ "lcd1:SCL", "esp:22", "green", [ "h-86.4", "v86.7" ] ],
+    [ "bz1:1", "esp:19", "green", [ "v19.2", "h-76.8", "v-67.2" ] ],
+    [ "bz1:2", "esp:GND.1", "green", [ "v259.2", "h-538", "v-240" ] ]
+  ],
+  "dependencies": {}
+}
