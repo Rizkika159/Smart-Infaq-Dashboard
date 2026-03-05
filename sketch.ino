@@ -37,6 +37,7 @@ void setup() {
   lcd.clear();
   lcd.print("WiFi Terkoneksi!");
   
+  
   client.setServer(mqtt_server, 1883);
 }
 
@@ -71,13 +72,13 @@ void loop() {
 
   // Tampilan LCD
   lcd.setCursor(0, 0);
-  lcd.print("SMART-INFAQ");
+  lcd.print("SMART INFAQ......");
   lcd.setCursor(0, 1);
   lcd.print("Isi: " + String(isiPersen) + "%   ");
 
   // Publish ke MQTT
   String payload = String(isiPersen);
-  client.publish("masjid/charity/kapasitas", payload.c_str());
+  client.publish("smartinfaq/kika/charity", payload.c_str());
 
   // Logika Buzzer (Alarm jika penuh)
   if (isiPersen > 90) {
