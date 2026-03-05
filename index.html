@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart-Infaq Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+    <style>
+        body { font-family: Arial; text-align: center; background: #f4f4f4; padding: 50px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+        h1 { color: #2c3e50; }
+        #status { font-size: 20px; color: green; margin-bottom: 20px; }
+        #data { font-size: 80px; font-weight: bold; color: #e67e22; }
+        .unit { font-size: 30px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🌙 Smart-Infaq Dashboard</h1>
+        <div id="status">Menghubungkan ke MQTT...</div>
+        <div id="data">0<span class="unit">%</span></div>
+        <p>Kapasitas Kotak Amal (Real-time)</p>
+    </div>
+
+    <script>
+        // Konfigurasi ke Broker HiveMQ
+        const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
+        const topic = 'smartinfaq/kika/charity';
+
+        client.on('connect', () => {
+            document.getElementById('status').innerText = "Terhubung ke Internet ✅";
+            client.subscribe(topic);
+        });
+
+        client.on('message', (t, message) => {
+            document.getElementById('data').innerHTML = message.toString() + '<span class="unit">%</span>';
+        });
+    </script>
+</body>
+</html>
